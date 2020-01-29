@@ -7,17 +7,13 @@ makeCacheMatrix <- function(x = matrix()) {
     # The inverse of the matrix x
     inv_x <- NULL
 
-    # set <- function(y) {
-    #     x <<- y
-    #     inv_x <<- NULL
-    # }
-
     # Get the original matrix
     get <- function() x
 
     setinverse <- function(mat) {
         inv_x <<- mat
     }
+
     getinverse <- function() inv_x
 
     list(get = get,
@@ -30,10 +26,19 @@ makeCacheMatrix <- function(x = matrix()) {
 
 cacheSolve <- function(x, ...) {
     ## Return a matrix that is the inverse of 'x'
+
+    # Create an identity matrix with the same dimensions as that of x
+    identity_matrix <- diag(nrow = nrow(x$get()), ncol = ncol(x$get()))
+
     inv_x <- x$getinverse()
     if(!is.null(inv_x)) {
-        message("Getting cached data.")
-        return(inv_x)
+        if(inv_x %*% x$get() == identity_matrix) {
+            message("Getting cached data.")
+            return(inv_x)
+        } else {
+            print("The matrix passed as an argument is not the same used to store the inverse. Exiting.")
+            return(NULL)
+        }
     }
     data <- x$get()
     inv_x <- solve(data)
