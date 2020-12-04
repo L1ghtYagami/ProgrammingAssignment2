@@ -1,10 +1,3 @@
-## Put comments here that give an overall description of what your
-## functions do
-# The two functions makeCacheMatrix and cacheSolve make a cache of a matrix and
-# it's inverse (if provided) so that the inverse is not calculated repeatedly
-
-
-## Write a short comment describing this function
 # This function creates a special "matrix", that is nothing but a list
 # containing the functions to
 # 1.    set the matrix
@@ -37,7 +30,6 @@ makeCacheMatrix <- function(x = matrix()) {
 }
 
 
-## Write a short comment describing this function
 # The following function calculates the inverse of the special "matrix" created
 # with the above function. It first checks to see if the inverse has already
 # been calculated. If it is, it gets the inverse matrix from the cache and skips
